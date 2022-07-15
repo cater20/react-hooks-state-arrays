@@ -5,13 +5,21 @@ function SpicyFoodList() {
   const [foods, setFoods] = useState(spicyFoods);
   const [filterBy, setFilterBy] = useState("All");
 
+  const foodsToDisplay = foods.filter((food) => {
+    if (filterBy === "All") {
+      return true;
+    } else {
+      return food.cuisine === filterBy;
+    }
+  });
+
   function handleAddFood() {
     const newFood = getNewRandomSpicyFood();
     const newFoodArray=[...foods,newFood];
     setFoods(newFoodArray);
-    //console.log(newFood);
+    console.log(newFood);
   }
-  const newFoodArray=[...foods, newFood];
+  //const newFoodArray=[...foods, newFood];
 
 function handleclick(id){
 const newFoodArray=foods.map((food)=>
@@ -27,19 +35,20 @@ setFoods(newFoodArray);
 }
 
 
-  const foodList = foods.map((food) => (
+
+  const foodList = foodsToDisplay.map((food) => (
     <li key={food.id} onclick={()=>handleclick(food.id)}>
       {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
     </li>
   ));
-
   function handleFilterChange(event) {
     setFilterBy(event.target.value);
   }
+ 
 
   return (
     <div>
-      <select name="filter">
+      <select name="filter"onChange={handleFilterChange}>
   <option value="All">All</option>
   <option value="American">American</option>
   <option value="Sichuan">Sichuan</option>
