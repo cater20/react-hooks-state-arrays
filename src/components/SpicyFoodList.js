@@ -3,6 +3,7 @@ import { spicyFoods, getNewRandomSpicyFood } from "../data";
 
 function SpicyFoodList() {
   const [foods, setFoods] = useState(spicyFoods);
+  const [filterBy, setFilterBy] = useState("All");
 
   function handleAddFood() {
     const newFood = getNewRandomSpicyFood();
@@ -25,11 +26,16 @@ const newFoodArray=foods.map((food)=>
 setFoods(newFoodArray);
 }
 
+
   const foodList = foods.map((food) => (
     <li key={food.id} onclick={()=>handleclick(food.id)}>
       {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
     </li>
   ));
+
+  function handleFilterChange(event) {
+    setFilterBy(event.target.value);
+  }
 
   return (
     <div>
