@@ -15,7 +15,7 @@ function SpicyFoodList() {
 
 
   const foodList = foods.map((food) => (
-    <li key={food.id}>
+    <li key={food.id} onclick={()=>handleclick(food.id)}>
       {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
     </li>
   ));
